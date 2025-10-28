@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://m6ah5ykm2bqn"]
+
+[ext_resource type="Script" uid="uid://dri11a16j7co5" path="res://area_2d.gd" id="1_qchcp"]
+
+[sub_resource type="GDScript" id="GDScript_po2w8"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="PushableBlocks" type="Node2D"]
+script = SubResource("GDScript_po2w8")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("1_qchcp")

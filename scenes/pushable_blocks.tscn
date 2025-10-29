@@ -1,23 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://m6ah5ykm2bqn"]
+[gd_scene load_steps=7 format=3 uid="uid://m6ah5ykm2bqn"]
 
+[ext_resource type="Texture2D" uid="uid://4p2horqh2rr2" path="res://assets/Free/Terrain/Terrain (16x16).png" id="1_g552a"]
+[ext_resource type="Script" uid="uid://ujh18r0t501d" path="res://scenes/pushable_blocks.gd" id="1_h7q63"]
 [ext_resource type="Script" uid="uid://dri11a16j7co5" path="res://area_2d.gd" id="1_qchcp"]
 
-[sub_resource type="GDScript" id="GDScript_po2w8"]
-script/source = "extends Node2D
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7q63"]
+size = Vector2(14, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbu7m"]
+size = Vector2(48, 16)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iclnw"]
+size = Vector2(11.5, 16)
 
+[node name="PushableBlocks" type="AnimatableBody2D"]
+script = ExtResource("1_h7q63")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_g552a")
+region_enabled = true
+region_rect = Rect2(192.227, 127.968, 47.6248, 16.1518)
 
-[node name="PushableBlocks" type="Node2D"]
-script = SubResource("GDScript_po2w8")
-
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2Dleft" type="Area2D" parent="."]
 script = ExtResource("1_qchcp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Dleft"]
+position = Vector2(-21, 0)
+shape = SubResource("RectangleShape2D_h7q63")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gbu7m")
+
+[node name="Area2Dright" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Dright"]
+position = Vector2(22, 0)
+shape = SubResource("RectangleShape2D_iclnw")
+
+[connection signal="body_entered" from="Area2Dleft" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2Dright" to="." method="_on_area_2_dright_body_entered"]

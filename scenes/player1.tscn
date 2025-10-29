@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://phicum10035h"]
+[gd_scene load_steps=54 format=3 uid="uid://phicum10035h"]
 
 [ext_resource type="Texture2D" uid="uid://bprosgqim6tdt" path="res://assets/Free/Main Characters/Ninja Frog/Idle (32x32).png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://dr87yatjsw4hx" path="res://scenes/player1.gd" id="1_onrkg"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dylc6cbouolrr" path="res://scenes/animated_sprite_2d.gd" id="5_64a0l"]
 [ext_resource type="Texture2D" uid="uid://dbmcf8av7joj4" path="res://assets/Free/Main Characters/Ninja Frog/Jump (32x32).png" id="5_dcfem"]
 [ext_resource type="Texture2D" uid="uid://cqnjjml06wsgw" path="res://assets/Free/Main Characters/Ninja Frog/Run (32x32).png" id="6_snghq"]
+[ext_resource type="Texture2D" uid="uid://b508jw3d51jed" path="res://assets/Free/Main Characters/Ninja Frog/Double Jump (32x32).png" id="7_sd87i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_64a0l"]
 atlas = ExtResource("2_h2x5w")
@@ -152,6 +153,30 @@ region = Rect2(320, 0, 32, 32)
 atlas = ExtResource("6_snghq")
 region = Rect2(352, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ahura"]
+atlas = ExtResource("7_sd87i")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hli5"]
+atlas = ExtResource("7_sd87i")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwxbl"]
+atlas = ExtResource("7_sd87i")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cawg"]
+atlas = ExtResource("7_sd87i")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tvqc"]
+atlas = ExtResource("7_sd87i")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ip5k"]
+atlas = ExtResource("7_sd87i")
+region = Rect2(160, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_onrkg"]
 animations = [{
 "frames": [{
@@ -286,11 +311,37 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ahura")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hli5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwxbl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4cawg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tvqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ip5k")
+}],
+"loop": true,
+"name": &"won",
+"speed": 15.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i3pqv"]
 radius = 3.0
 height = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_snghq"]
+size = Vector2(30, 28)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_onrkg")
@@ -298,8 +349,7 @@ script = ExtResource("1_onrkg")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_onrkg")
-animation = &"run"
-frame_progress = 0.45654184
+animation = &"won"
 script = ExtResource("5_64a0l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -312,6 +362,13 @@ wait_time = 0.3
 [node name="can_dash_timer1" type="Timer" parent="."]
 wait_time = 0.4
 
+[node name="winningArea" type="Area2D" parent="."]
+
+[node name="winningColl" type="CollisionShape2D" parent="winningArea"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_snghq")
+
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="timeout" from="dash_timer1" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="can_dash_timer1" to="." method="_on_can_dash_timer_timeout"]
+[connection signal="body_entered" from="winningArea" to="." method="_on_winning_area_body_entered"]

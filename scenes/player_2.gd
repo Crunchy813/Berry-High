@@ -1,8 +1,9 @@
 extends CharacterBody2D
 @onready var cam: PathFollow2D=$"../cameraPath/CamFollowPath"
 @onready var animatedSprite: AnimatedSprite2D=$AnimatedSprite2D
+@onready var P1:CharacterBody2D=$"../player1"
 const SPEED = 100.0
-const JUMP_VELOCITY = -370.0
+const JUMP_VELOCITY = -250.0
 @onready var dash_timer:Timer=$dash_timer2
 @onready var can_dash_timer:Timer=$can_dash_timer2
 var dashing=false
@@ -11,6 +12,9 @@ var can_dash=true
 var default=true
 
 func _physics_process(delta: float) -> void:
+	if P1.won:
+		animatedSprite.play("won")
+		return
 	if cam.deathPause:
 		animatedSprite.play("death")
 		return

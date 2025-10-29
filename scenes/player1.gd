@@ -6,17 +6,18 @@ extends CharacterBody2D
 @onready var can_dash_timer:Timer=$can_dash_timer1
 var dashing=false
 const SPEED = 100.0
-const JUMP_VELOCITY = -370.0
+const JUMP_VELOCITY = -250.0
 const DASH_SPEED=400
 var can_dash=true
 @export var animationsFliped:bool= false
 @export var going_Right:bool=false
-#when we add our own animations we make the default to the left.but
-#when the charecter changes direction we change the bool value right(or an if statement for velocity
-#and that bool is true we do the flipH and bring it back when it changes direction again ill try it on dash for now
+@export var won:bool=false
 
 func _physics_process(delta: float) -> void:
-
+	if won: 
+		#IK the animation is ugly just a placeholder
+		animatedSprite.play("won")
+		return
 
 
 	if cam.deathPause:
@@ -98,3 +99,8 @@ func _on_dash_timer_timeout() -> void:
 
 func _on_can_dash_timer_timeout() -> void:
 	can_dash=true
+
+
+func _on_winning_area_body_entered(body: Node2D) -> void:
+		if body == p2:
+			won=true

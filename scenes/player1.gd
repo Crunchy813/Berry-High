@@ -4,35 +4,39 @@ extends CharacterBody2D
 @onready var animatedSprite:AnimatedSprite2D=$AnimatedSprite2D
 @onready var dash_timer:Timer=$dash_timer1
 @onready var can_dash_timer:Timer=$can_dash_timer1
+@onready var Trail:Line2D=$Trail2D
+@onready var Hearts:CPUParticles2D=$CPUParticles2D
 var dashing=false
 const SPEED = 100.0
-const JUMP_VELOCITY = -370.0
+const JUMP_VELOCITY = -250.0
 const DASH_SPEED=400
 var can_dash=true
-@export var animationsFliped:bool= false
-@export var going_Right:bool=false
-#when we add our own animations we make the default to the left.but
-#when the charecter changes direction we change the bool value right(or an if statement for velocity
-#and that bool is true we do the flipH and bring it back when it changes direction again ill try it on dash for now
+var won=false
 
 func _physics_process(delta: float) -> void:
-
-
-
+	if not won: 
+		Hearts.emitting=false
+	else:
+		animatedSprite.play("win")
+		Hearts.emitting=true
+		return
+	if dashing: 
+		Trail.visible=true
+	else:
+		Trail.visible=false
 	if cam.deathPause:
 		animatedSprite.play("death")
 		return
-	if velocity.x==0 and velocity.y==0:
-		animatedSprite.play("default")
-	if velocity.y>0:
-		animatedSprite.play("jump")
+	if won:
+		animatedSprite.play("win")
+		return
+	HandleAnimation()
+		
 	var direction := Input.get_axis("move_leftP1", "move_rightP1")
 	if not is_on_floor() and not dashing:
-		velocity.y += 500 * delta
-
+		velocity.y += 700 * delta
 	# Handle jump.
 	if Input.is_action_just_pressed("jumpP1") and is_on_floor():
-		animatedSprite.play("jump")
 		velocity.y = JUMP_VELOCITY
 	if direction:
 		if dashing:
@@ -51,10 +55,6 @@ func _physics_process(delta: float) -> void:
 		can_dash=false
 		can_dash_timer.start()
 		dash_timer.start()
-		if(direction>0):
-			animatedSprite.play("dash")
-		else:
-			animatedSprite.play("dash")
 	move_and_slide()
 	
 		
@@ -77,20 +77,7 @@ func _on_animated_sprite_2d_animation_looped() -> void:
 			print("reset")
 			animatedSprite.play("default")
 
-		
-func update_animation():
-	if velocity.x==0 and velocity.y==0:
-		animatedSprite.play("default")
-		return
-	if velocity.y>0:
-		animatedSprite.scale.x=sign(velocity.x)
-		animatedSprite.play("jump")
-	if velocity.y==0 and not velocity.x==0 and not dashing:
-		animatedSprite.scale.x=sign(velocity.x)
-		animatedSprite.play("run")
-	if dashing:
-		animatedSprite.scale.x=sign(velocity.x)
-		animatedSprite.play("dash")
+
 
 func _on_dash_timer_timeout() -> void:
 	dashing=false
@@ -98,3 +85,37 @@ func _on_dash_timer_timeout() -> void:
 
 func _on_can_dash_timer_timeout() -> void:
 	can_dash=true
+
+
+func HandleAnimation()-> void:
+	#JUMP
+	if velocity.y!=0:
+		if velocity.x<0:
+			animatedSprite.play("jumpLeft")
+		if velocity.x>0:
+			animatedSprite.play("jumpRight")
+		if velocity.x==0:
+			animatedSprite.play("jumpUp")
+	#DAHSING
+	elif (dashing):
+		if velocity.x>0:
+			animatedSprite.play("dashRight")
+		if velocity.x<0:
+			animatedSprite.play("dashLeft")
+	#RUN
+	elif velocity.x!=0 and velocity.y==0:
+		if velocity.x<0:
+			animatedSprite.play("runLeft")
+		if velocity.x>0:
+			animatedSprite.play("runRight")
+	elif velocity.x==0 and velocity.y==0: 
+		animatedSprite.play("default")
+	
+	
+	
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body== $"../player2":
+		won=true
+		

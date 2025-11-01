@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://vwv6ie87vqmo"]
+
+[ext_resource type="Script" uid="uid://dri11a16j7co5" path="res://area_2d.gd" id="1_27wcx"]
+[ext_resource type="Texture2D" uid="uid://bn38r5xwopcke" path="res://assets/Charecters/bear/freddy-small.png" id="2_vg816"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u8adc"]
+radius = 4.0
+
+[node name="bear" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_27wcx")
+
+[node name="Freddy-small" type="Sprite2D" parent="."]
+texture = ExtResource("2_vg816")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u8adc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

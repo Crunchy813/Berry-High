@@ -14,6 +14,7 @@ size = Vector2(48, 16)
 size = Vector2(11.5, 16)
 
 [node name="PushableBlocks" type="AnimatableBody2D"]
+collision_layer = 3
 script = ExtResource("1_h7q63")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

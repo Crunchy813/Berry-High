@@ -1,0 +1,107 @@
+[gd_scene load_steps=6 format=3 uid="uid://eh2nw3rwido2"]
+
+[ext_resource type="Script" uid="uid://dmm4a184auh0p" path="res://scenes/pause_menu.gd" id="1_n87rw"]
+[ext_resource type="FontFile" uid="uid://rft3vvmuwao6" path="res://assets/Fonts/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="2_myx47"]
+
+[sub_resource type="Animation" id="Animation_kukqi"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_myx47"]
+resource_name = "opacity"
+length = 0.4
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5d2l8"]
+_data = {
+&"RESET": SubResource("Animation_kukqi"),
+&"opacity": SubResource("Animation_myx47")
+}
+
+[node name="Pause Menu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n87rw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.407843)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = -38.0
+offset_right = 164.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_myx47")
+theme_override_font_sizes/font_size = 64
+text = "Resume"
+
+[node name="Quit" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_myx47")
+theme_override_font_sizes/font_size = 64
+text = "Quit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_5d2l8")
+}
+
+[node name="Player1 Controls" type="Label" parent="."]
+texture_filter = 3
+layout_mode = 0
+offset_left = -514.0
+offset_top = -27.0
+offset_right = -216.0
+offset_bottom = 138.0
+theme_override_fonts/font = ExtResource("2_myx47")
+theme_override_font_sizes/font_size = 32
+text = "Player 1:
+WAD to move
+Right shift to DASH
+"
+
+[node name="Player2 Controls" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 215.0
+offset_top = -36.0
+offset_right = 528.0
+offset_bottom = 129.0
+theme_override_fonts/font = ExtResource("2_myx47")
+theme_override_font_sizes/font_size = 32
+text = "Player 2:
+ARROW KEYS to move
+Left shift to DASH
+"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

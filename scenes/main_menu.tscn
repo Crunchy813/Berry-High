@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://t7wei1incfvp"]
+
+[ext_resource type="Script" uid="uid://dka3aenyhytvw" path="res://main_menu.gd" id="1_l6cm7"]
+
+[node name="Main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 289.0
+offset_right = 423.0
+offset_bottom = 411.0
+text = "Start"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 458.0
+offset_right = 423.0
+offset_bottom = 580.0
+text = "Quit
+"
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

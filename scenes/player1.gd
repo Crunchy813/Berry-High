@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var can_dash_timer:Timer=$can_dash_timer1
 @onready var Trail:Line2D=$Trail2D
 @onready var Hearts:CPUParticles2D=$CPUParticles2D
+@onready var BlocksAnimations: AnimationPlayer = %BlocksAnimationPlayer
 var dashing=false
 const SPEED = 100.0
 const JUMP_VELOCITY = -250.0
@@ -60,7 +61,7 @@ func _physics_process(delta: float) -> void:
 		
 func killPlayer():
 	cam.deathPause=true
-	
+	BlocksAnimations.play("RESET")
 	
 func _on_CamDangerZone_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:

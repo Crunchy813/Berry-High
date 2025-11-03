@@ -8,6 +8,7 @@ func _ready() -> void:
 	P1.won=false
 	pathfolow.progress=0.0
 	
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

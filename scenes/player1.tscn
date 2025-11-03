@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://phicum10035h"]
+[gd_scene load_steps=57 format=3 uid="uid://phicum10035h"]
 
 [ext_resource type="Script" uid="uid://dr87yatjsw4hx" path="res://scenes/player1.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bfvdjbi676amm" path="res://assets/Charecters/StrawBerry/StrawberryDashLeft.png" id="2_euhpk"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bhrhwdqo1ckgt" path="res://assets/Charecters/StrawBerry/SIdle.png" id="5_euhpk"]
 [ext_resource type="Texture2D" uid="uid://bw2b0d7q1hp4a" path="res://assets/Charecters/StrawBerry/strawBerryJumpRIght.png" id="5_sd87i"]
 [ext_resource type="Texture2D" uid="uid://bve7cnibh6di3" path="res://assets/Charecters/StrawBerry/StrawberryWalkLeft.png" id="5_snghq"]
+[ext_resource type="Texture2D" uid="uid://itfafe53fjat" path="res://assets/Free/Items/Fruits/Collected.png" id="6_6amox"]
 [ext_resource type="Texture2D" uid="uid://bhi58ylsdfeiv" path="res://assets/Charecters/StrawBerry/SIdleSleeping.png" id="6_16ml7"]
 [ext_resource type="Texture2D" uid="uid://cd6cqkh6ailmv" path="res://assets/Charecters/StrawBerry/Death.png" id="6_do31k"]
 [ext_resource type="Texture2D" uid="uid://ccunljlka4o2a" path="res://assets/Charecters/StrawBerry/SIdleSleeping1.png" id="7_mod63"]
@@ -37,6 +38,30 @@ region = Rect2(177, 0, 15, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2tvqc"]
 atlas = ExtResource("6_do31k")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ip5k"]
+atlas = ExtResource("6_6amox")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrohh"]
+atlas = ExtResource("6_6amox")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_romyf"]
+atlas = ExtResource("6_6amox")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43u8b"]
+atlas = ExtResource("6_6amox")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6nbf"]
+atlas = ExtResource("6_6amox")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2477"]
+atlas = ExtResource("6_6amox")
+region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_do31k"]
 atlas = ExtResource("5_euhpk")
@@ -151,15 +176,55 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2tvqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tvqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tvqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tvqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tvqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tvqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tvqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tvqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tvqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tvqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ip5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrohh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_romyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43u8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6nbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2477")
 }],
 "loop": true,
 "name": &"death",
-"speed": 1.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"death_1",
-"speed": 5.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,

@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 	if deathPause==true or P1.won==true:
 		progress_ratio +=0
 		return
-	progress_ratio +=delta * 0.005
+	progress_ratio +=delta * 0.01
 		
 	
 

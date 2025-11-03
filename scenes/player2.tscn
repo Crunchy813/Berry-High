@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cgk2wkv8lpkk5"]
+[gd_scene load_steps=41 format=3 uid="uid://cgk2wkv8lpkk5"]
 
 [ext_resource type="Script" uid="uid://bwhgnxrdntk5u" path="res://scenes/player_2.gd" id="1_dj65e"]
 [ext_resource type="Texture2D" uid="uid://clc7i1ess8dbt" path="res://assets/Charecters/BlueBerry/DashLeft.png" id="2_dauvq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://y1l07hsjcn04" path="res://assets/Charecters/BlueBerry/DashRight.png" id="3_7f0u4"]
 [ext_resource type="Texture2D" uid="uid://cwp5vw10hgpq5" path="res://assets/Charecters/BlueBerry/JumpLeft.png" id="4_24gv0"]
 [ext_resource type="Texture2D" uid="uid://dw3yy35yhky26" path="res://assets/Charecters/BlueBerry/Death.png" id="4_ftkcl"]
+[ext_resource type="Texture2D" uid="uid://itfafe53fjat" path="res://assets/Free/Items/Fruits/Collected.png" id="5_bsup3"]
 [ext_resource type="Texture2D" uid="uid://shi8di70y6lw" path="res://assets/Charecters/BlueBerry/JumpRight.png" id="5_dauvq"]
 [ext_resource type="Texture2D" uid="uid://cc3t8nh27p8ac" path="res://assets/Charecters/BlueBerry/JumpUp.png" id="6_7f0u4"]
 [ext_resource type="Texture2D" uid="uid://bg4l35pi0qkib" path="res://assets/Charecters/BlueBerry/walkLeft.png" id="7_ftkcl"]
@@ -24,6 +25,30 @@ region = Rect2(0, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_rei4x"]
 atlas = ExtResource("4_ftkcl")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwv1h"]
+atlas = ExtResource("5_bsup3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b32sq"]
+atlas = ExtResource("5_bsup3")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnupf"]
+atlas = ExtResource("5_bsup3")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvxaf"]
+atlas = ExtResource("5_bsup3")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jndh6"]
+atlas = ExtResource("5_bsup3")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_io5br"]
+atlas = ExtResource("5_bsup3")
+region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ltp6r"]
 atlas = ExtResource("3_3ejgl")
@@ -102,10 +127,55 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rei4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rei4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rei4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rei4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rei4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rei4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rei4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rei4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rei4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rei4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwv1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b32sq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnupf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvxaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jndh6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_io5br")
 }],
 "loop": true,
 "name": &"death",
-"speed": 12.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,

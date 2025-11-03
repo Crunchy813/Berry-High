@@ -7,10 +7,13 @@ extends CharacterBody2D
 @onready var Trail:Line2D=$Trail2D
 @onready var Hearts:CPUParticles2D=$CPUParticles2D
 @onready var BlocksAnimations: AnimationPlayer = %BlocksAnimationPlayer
+@onready var C1:Area2D=$"../CheckPoint1"
+@onready var C1Spawn1:Node2D=$"../C1Spawn1"
+@onready var C1Spawn2:Node2D=$"../C1Spawn2"
 var dashing=false
 const SPEED = 100.0
-const JUMP_VELOCITY = -250.0
-const DASH_SPEED=400
+const JUMP_VELOCITY = -220.0
+const DASH_SPEED=300
 var can_dash=true
 var won=false
 
@@ -35,7 +38,7 @@ func _physics_process(delta: float) -> void:
 		
 	var direction := Input.get_axis("move_leftP1", "move_rightP1")
 	if not is_on_floor() and not dashing:
-		velocity.y += 700 * delta
+		velocity.y += 300 * delta
 	# Handle jump.
 	if Input.is_action_just_pressed("jumpP1") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -71,13 +74,17 @@ func _on_CamDangerZone_body_entered(body: Node2D) -> void:
 
 func _on_animated_sprite_2d_animation_looped() -> void:
 	if animatedSprite.animation=="death":
-			cam.progress=0.0
 			cam.deathPause=false
-			position=$"../P1Respawn".position
-			p2.position=$"../P2Respawn".position
-			print("reset")
 			animatedSprite.play("default")
-
+			if C1.checked:
+				cam.progress=511.35
+				position=C1Spawn1.position
+				p2.position=C1Spawn2.position
+				return
+			else:
+				cam.progress=0.0
+				position=$"../P1Respawn".position
+				p2.position=$"../P2Respawn".position
 
 
 func _on_dash_timer_timeout() -> void:
@@ -111,7 +118,7 @@ func HandleAnimation()-> void:
 			animatedSprite.play("runRight")
 	elif velocity.x==0 and velocity.y==0: 
 		animatedSprite.play("default")
-	
+
 	
 	
 
@@ -120,3 +127,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body== $"../player2":
 		won=true
 		
+
+
+func _on_spikes_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		killPlayer()
+	

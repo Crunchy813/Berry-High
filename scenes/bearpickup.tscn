@@ -1,7 +1,106 @@
-[gd_scene load_steps=4 format=3 uid="uid://vwv6ie87vqmo"]
+[gd_scene load_steps=19 format=3 uid="uid://vwv6ie87vqmo"]
 
 [ext_resource type="Script" uid="uid://dri11a16j7co5" path="res://area_2d.gd" id="1_27wcx"]
-[ext_resource type="Texture2D" uid="uid://bn38r5xwopcke" path="res://assets/Charecters/bear/freddy-small.png" id="2_vg816"]
+[ext_resource type="Texture2D" uid="uid://itfafe53fjat" path="res://assets/Free/Items/Fruits/Collected.png" id="2_34wwf"]
+[ext_resource type="Texture2D" uid="uid://ud2nr71er7mf" path="res://assets/Charecters/bear/freddy.png" id="2_p1epd"]
+[ext_resource type="Texture2D" uid="uid://b5gsjeq5w3o82" path="res://assets/Charecters/bear/hearts.png" id="4_0do70"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ebuj"]
+atlas = ExtResource("2_p1epd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6m6ir"]
+atlas = ExtResource("2_34wwf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jf4sx"]
+atlas = ExtResource("2_34wwf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii06q"]
+atlas = ExtResource("2_34wwf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tk78"]
+atlas = ExtResource("2_34wwf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yecd3"]
+atlas = ExtResource("2_34wwf")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8w4b"]
+atlas = ExtResource("2_34wwf")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34wwf"]
+atlas = ExtResource("4_0do70")
+region = Rect2(96, 0, 19, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1epd"]
+atlas = ExtResource("4_0do70")
+region = Rect2(115, 0, 19, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6j5gg"]
+atlas = ExtResource("4_0do70")
+region = Rect2(134, 0, 19, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bju8"]
+atlas = ExtResource("4_0do70")
+region = Rect2(157, 0, 19, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uuch"]
+atlas = ExtResource("4_0do70")
+region = Rect2(176, 0, 19, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6m6ir"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ebuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6m6ir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jf4sx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii06q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tk78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yecd3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8w4b")
+}],
+"loop": true,
+"name": &"Collected",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34wwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1epd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6j5gg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bju8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uuch")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8adc"]
 radius = 4.0
@@ -10,10 +109,15 @@ radius = 4.0
 collision_layer = 4
 script = ExtResource("1_27wcx")
 
-[node name="Freddy-small" type="Sprite2D" parent="."]
-texture = ExtResource("2_vg816")
+[node name="BearSmall" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_6m6ir")
+autoplay = "default"
+frame = 4
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_u8adc")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_looped" from="BearSmall" to="." method="_on_heart_animation_looped"]

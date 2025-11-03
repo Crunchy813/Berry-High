@@ -28,12 +28,13 @@ func _physics_process(delta: float) -> void:
 		
 	if not is_on_floor():
 		velocity.y += 350* delta
+		
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jumpP2") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
+		$sfx_jump.play()
+	# Get the inp$sfx_jumput direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("move_leftP2", "move_rightP2")
 	if direction:
@@ -51,6 +52,8 @@ func _physics_process(delta: float) -> void:
 		can_dash=false
 		can_dash_timer.start()
 		dash_timer.start()
+		if velocity.x != 0:
+			$sfx_dash.play()
 	move_and_slide()
 	
 	

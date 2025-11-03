@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdk81sys458jc"
-path="res://.godot/imported/berryhigh.png-196ee1d1fa6402560af5f5dc74219fa3.ctex"
+uid="uid://ctuam80dmi4v2"
+path="res://.godot/imported/2.png-c5be3384ef4c03d9d476c67d9531fd9c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/berryhigh.png"
-dest_files=["res://.godot/imported/berryhigh.png-196ee1d1fa6402560af5f5dc74219fa3.ctex"]
+source_file="res://assets/Nature Landscapes Free Pixel Art/nature_6/2.png"
+dest_files=["res://.godot/imported/2.png-c5be3384ef4c03d9d476c67d9531fd9c.ctex"]
 
 [params]
 

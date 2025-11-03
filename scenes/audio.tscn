@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dapeor3tm42q0"]
+
+[ext_resource type="AudioStream" uid="uid://ov7qbrd6l1ij" path="res://assets/Sound/soundeffectsgame/sounds__deathsound.wav" id="1_f5a2e"]
+[ext_resource type="AudioStream" uid="uid://dbnwu1anjlhtm" path="res://assets/Sound/soundeffectsgame/sounds__deathsoundeffect.wav" id="2_hlm5c"]
+[ext_resource type="PackedScene" path="res://scenes/music.tscn" id="3_wdljl"]
+
+[node name="audio" type="Node"]
+
+[node name="sfx_death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_f5a2e")
+
+[node name="sfx_gameover" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_hlm5c")
+
+[node name="Music" parent="." instance=ExtResource("3_wdljl")]
+bus = &"Master"

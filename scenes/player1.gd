@@ -10,6 +10,11 @@ extends CharacterBody2D
 @onready var C1:Area2D=$"../CheckPoint1"
 @onready var C1Spawn1:Node2D=$"../C1Spawn1"
 @onready var C1Spawn2:Node2D=$"../C1Spawn2"
+@onready var music = $"../audio/Music" 
+@onready var C2:Area2D=$"../CheckPoint2"
+@onready var C2Spawn1:Node2D=$"../C2Spawn1"
+@onready var C2Spawn2:Node2D=$"../C2Spawn2"
+@onready var winlabel = $"../win"
 var dashing=false
 const SPEED = 100.0
 const JUMP_VELOCITY = -220.0
@@ -17,11 +22,16 @@ const DASH_SPEED=300
 var can_dash=true
 var won=false
 
+
+func _ready() -> void:
+	winlabel.hide()
+	
 func _physics_process(delta: float) -> void:
 	if not won: 
 		Hearts.emitting=false
 	else:
 		animatedSprite.play("win")
+		winlabel.show()
 		Hearts.emitting=true
 		return
 	if dashing: 
@@ -33,15 +43,18 @@ func _physics_process(delta: float) -> void:
 		return
 	if won:
 		animatedSprite.play("win")
+		winlabel.show()
 		return
 	HandleAnimation()
 		
 	var direction := Input.get_axis("move_leftP1", "move_rightP1")
 	if not is_on_floor() and not dashing:
 		velocity.y += 300 * delta
+		
 	# Handle jump.
 	if Input.is_action_just_pressed("jumpP1") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		$sfx_jump.play()
 	if direction:
 		if dashing:
 			velocity.x = direction * DASH_SPEED
@@ -59,12 +72,17 @@ func _physics_process(delta: float) -> void:
 		can_dash=false
 		can_dash_timer.start()
 		dash_timer.start()
+		if velocity.x != 0:
+			$sfx_dash.play()
 	move_and_slide()
 	
 		
 func killPlayer():
 	cam.deathPause=true
-	BlocksAnimations.play("RESET")
+	music.stop()
+	$"../audio/sfx_death".play()
+	$"../audio/sfx_gameover".play()
+
 	
 func _on_CamDangerZone_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
@@ -75,7 +93,14 @@ func _on_CamDangerZone_body_entered(body: Node2D) -> void:
 func _on_animated_sprite_2d_animation_looped() -> void:
 	if animatedSprite.animation=="death":
 			cam.deathPause=false
+			music.play()
+			BlocksAnimations.play("RESET")
 			animatedSprite.play("default")
+			if C1.checked:
+				cam.progress=1026.52
+				position=C1Spawn1.position
+				p2.position=C1Spawn2.position
+				return
 			if C1.checked:
 				cam.progress=511.35
 				position=C1Spawn1.position
@@ -85,7 +110,6 @@ func _on_animated_sprite_2d_animation_looped() -> void:
 				cam.progress=0.0
 				position=$"../P1Respawn".position
 				p2.position=$"../P2Respawn".position
-
 
 func _on_dash_timer_timeout() -> void:
 	dashing=false

@@ -1,5 +1,5 @@
 extends Node
-
+@onready var p1 : CharacterBody2D = %player1
 var score = 0
 
 func add_point():

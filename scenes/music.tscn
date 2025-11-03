@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8fxwhayiv7o6"]
+
+[ext_resource type="AudioStream" uid="uid://bnxdyl535niga" path="res://assets/Sound/pixel-245147.mp3" id="1_3h6ak"]
+
+[node name="Music" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_3h6ak")
+autoplay = true
+bus = &"Music"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cgk2wkv8lpkk5"]
+[gd_scene load_steps=36 format=3 uid="uid://bvksw3dr5apbo"]
 
 [ext_resource type="Script" uid="uid://bwhgnxrdntk5u" path="res://scenes/player_2.gd" id="1_dj65e"]
 [ext_resource type="Texture2D" uid="uid://clc7i1ess8dbt" path="res://assets/Charecters/BlueBerry/DashLeft.png" id="2_dauvq"]
@@ -6,13 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://y1l07hsjcn04" path="res://assets/Charecters/BlueBerry/DashRight.png" id="3_7f0u4"]
 [ext_resource type="Texture2D" uid="uid://cwp5vw10hgpq5" path="res://assets/Charecters/BlueBerry/JumpLeft.png" id="4_24gv0"]
 [ext_resource type="Texture2D" uid="uid://dw3yy35yhky26" path="res://assets/Charecters/BlueBerry/Death.png" id="4_ftkcl"]
-[ext_resource type="Texture2D" uid="uid://itfafe53fjat" path="res://assets/Free/Items/Fruits/Collected.png" id="5_bsup3"]
 [ext_resource type="Texture2D" uid="uid://shi8di70y6lw" path="res://assets/Charecters/BlueBerry/JumpRight.png" id="5_dauvq"]
 [ext_resource type="Texture2D" uid="uid://cc3t8nh27p8ac" path="res://assets/Charecters/BlueBerry/JumpUp.png" id="6_7f0u4"]
 [ext_resource type="Texture2D" uid="uid://bg4l35pi0qkib" path="res://assets/Charecters/BlueBerry/walkLeft.png" id="7_ftkcl"]
 [ext_resource type="Texture2D" uid="uid://cmpy0510q0815" path="res://assets/Charecters/BlueBerry/walkRight.png" id="8_bsup3"]
 [ext_resource type="Texture2D" uid="uid://dcgbb06pfxonn" path="res://assets/Charecters/BlueBerry/win.png" id="11_7f0u4"]
 [ext_resource type="Script" uid="uid://c4yppvue4kbty" path="res://addons/trail_2d/trail_2d.gd" id="12_ftkcl"]
+[ext_resource type="AudioStream" uid="uid://d14ghjkdjk0e3" path="res://assets/Sound/soundeffectsgame/sounds__jumpsound1.wav" id="13_bsup3"]
+[ext_resource type="AudioStream" uid="uid://dy8k0j3p2jj8x" path="res://assets/Sound/soundeffectsgame/sounds__dashsound.wav" id="14_ltp6r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ftkcl"]
 atlas = ExtResource("2_dauvq")
@@ -25,30 +26,6 @@ region = Rect2(0, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_rei4x"]
 atlas = ExtResource("4_ftkcl")
 region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pwv1h"]
-atlas = ExtResource("5_bsup3")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b32sq"]
-atlas = ExtResource("5_bsup3")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bnupf"]
-atlas = ExtResource("5_bsup3")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gvxaf"]
-atlas = ExtResource("5_bsup3")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jndh6"]
-atlas = ExtResource("5_bsup3")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_io5br"]
-atlas = ExtResource("5_bsup3")
-region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ltp6r"]
 atlas = ExtResource("3_3ejgl")
@@ -127,55 +104,10 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rei4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rei4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rei4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rei4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rei4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rei4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rei4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rei4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rei4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rei4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pwv1h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b32sq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bnupf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gvxaf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jndh6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_io5br")
 }],
 "loop": true,
 "name": &"death",
-"speed": 20.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -295,12 +227,12 @@ animations = [{
 }]
 
 [sub_resource type="Curve" id="Curve_bsup3"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.79775286), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.797753), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_ltp6r"]
-offsets = PackedFloat32Array(0, 0.6148649, 1)
-colors = PackedColorArray(1, 0.75, 0.75, 0.34509805, 1, 0.9881757, 0.9881757, 0.024854243, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.614865, 1)
+colors = PackedColorArray(1, 0.75, 0.75, 0.345098, 1, 0.988176, 0.988176, 0.0248542, 1, 1, 1, 0)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hb4is"]
 radius = 5.0
@@ -335,6 +267,13 @@ wait_time = 0.4
 
 [node name="dash_timer2" type="Timer" parent="."]
 wait_time = 0.3
+
+[node name="sfx_jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_bsup3")
+
+[node name="sfx_dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_ltp6r")
+bus = &"SFX"
 
 [connection signal="timeout" from="can_dash_timer2" to="." method="_on_can_dash_timer_2_timeout"]
 [connection signal="timeout" from="dash_timer2" to="." method="_on_dash_timer_2_timeout"]

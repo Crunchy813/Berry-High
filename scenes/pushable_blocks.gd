@@ -2,20 +2,21 @@ extends AnimatableBody2D
 @onready var playerleft: CharacterBody2D = $"../../player1"
 @onready var playerright: CharacterBody2D = $"../../player2"
 @onready var animations: AnimationPlayer =  get_tree().get_root().get_node("/root/level/BlocksAnimationPlayer")
+@onready var cam: PathFollow2D =$"../../cameraPath/CamFollowPath"
 
 var done = false
 @export var BlockNumber: int = 0
 @export var GoLeftMode: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
 	pass
 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if cam.deathPause == true:
+		done = false
 	
 	
 

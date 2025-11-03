@@ -35,6 +35,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jumpP2") and is_on_floor():
 		animatedSprite.play("jump")
+		$sfx_jump.play()
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
@@ -55,6 +56,8 @@ func _physics_process(delta: float) -> void:
 		can_dash=false
 		can_dash_timer.start()
 		dash_timer.start()
+		if velocity.x != 0:
+			$sfx_dash.play()
 		if(direction>0):
 			animatedSprite.play("dash")
 		else:

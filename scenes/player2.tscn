@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cgk2wkv8lpkk5"]
+[gd_scene load_steps=36 format=3 uid="uid://bvksw3dr5apbo"]
 
 [ext_resource type="Script" uid="uid://bwhgnxrdntk5u" path="res://scenes/player_2.gd" id="1_dj65e"]
 [ext_resource type="Texture2D" uid="uid://clc7i1ess8dbt" path="res://assets/Charecters/BlueBerry/DashLeft.png" id="2_dauvq"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://cmpy0510q0815" path="res://assets/Charecters/BlueBerry/walkRight.png" id="8_bsup3"]
 [ext_resource type="Texture2D" uid="uid://dcgbb06pfxonn" path="res://assets/Charecters/BlueBerry/win.png" id="11_7f0u4"]
 [ext_resource type="Script" uid="uid://c4yppvue4kbty" path="res://addons/trail_2d/trail_2d.gd" id="12_ftkcl"]
+[ext_resource type="AudioStream" uid="uid://d14ghjkdjk0e3" path="res://assets/Sound/soundeffectsgame/sounds__jumpsound1.wav" id="13_bsup3"]
+[ext_resource type="AudioStream" uid="uid://dy8k0j3p2jj8x" path="res://assets/Sound/soundeffectsgame/sounds__dashsound.wav" id="14_ltp6r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ftkcl"]
 atlas = ExtResource("2_dauvq")
@@ -225,12 +227,12 @@ animations = [{
 }]
 
 [sub_resource type="Curve" id="Curve_bsup3"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.79775286), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.797753), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_ltp6r"]
-offsets = PackedFloat32Array(0, 0.6148649, 1)
-colors = PackedColorArray(1, 0.75, 0.75, 0.34509805, 1, 0.9881757, 0.9881757, 0.024854243, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.614865, 1)
+colors = PackedColorArray(1, 0.75, 0.75, 0.345098, 1, 0.988176, 0.988176, 0.0248542, 1, 1, 1, 0)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hb4is"]
 radius = 5.0
@@ -265,6 +267,13 @@ wait_time = 0.4
 
 [node name="dash_timer2" type="Timer" parent="."]
 wait_time = 0.3
+
+[node name="sfx_jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_bsup3")
+
+[node name="sfx_dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_ltp6r")
+bus = &"SFX"
 
 [connection signal="timeout" from="can_dash_timer2" to="." method="_on_can_dash_timer_2_timeout"]
 [connection signal="timeout" from="dash_timer2" to="." method="_on_dash_timer_2_timeout"]

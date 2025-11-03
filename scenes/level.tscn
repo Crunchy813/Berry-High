@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cakan0y57w04x"]
+[gd_scene load_steps=24 format=4 uid="uid://cakan0y57w04x"]
 
 [ext_resource type="Script" uid="uid://c6rnbbwf2lm28" path="res://block_test.gd" id="1_2r41h"]
 [ext_resource type="Script" uid="uid://cymjwjprqomfy" path="res://scenes/game_manager.gd" id="2_olg7q"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://4p2horqh2rr2" path="res://assets/Free/Terrain/Terrain (16x16).png" id="6_t1rx8"]
 [ext_resource type="PackedScene" uid="uid://m6ah5ykm2bqn" path="res://scenes/pushable_blocks.tscn" id="8_b121j"]
 [ext_resource type="PackedScene" uid="uid://vwv6ie87vqmo" path="res://scenes/bearpickup.tscn" id="9_8c41q"]
+[ext_resource type="AudioStream" uid="uid://dbnwu1anjlhtm" path="res://assets/Sound/soundeffectsgame/sounds__deathsoundeffect.wav" id="9_64w2a"]
+[ext_resource type="AudioStream" uid="uid://ov7qbrd6l1ij" path="res://assets/Sound/soundeffectsgame/sounds__deathsound.wav" id="9_fpun6"]
+[ext_resource type="PackedScene" uid="uid://c8fxwhayiv7o6" path="res://scenes/music.tscn" id="10_8iemx"]
 [ext_resource type="Texture2D" uid="uid://djkdthxxxkgc7" path="res://assets/Free forest/Assets/Tiles.png" id="11_t1rx8"]
 
 [sub_resource type="Curve2D" id="Curve2D_4wwmi"]
@@ -37,7 +40,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(483, 1157)]
+"values": [Vector2(621, 1358)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PushableBlocks2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(622, 1322)]
 }
 
 [sub_resource type="Animation" id="Animation_b121j"]
@@ -53,13 +68,30 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(483, 1157), Vector2(441, 1157)]
+"values": [Vector2(621, 1358), Vector2(556, 1360)]
+}
+
+[sub_resource type="Animation" id="Animation_8iemx"]
+resource_name = "move2"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../PushableBlocks2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(622, 1322), Vector2(547, 1322)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_olg7q"]
 _data = {
 &"RESET": SubResource("Animation_8c41q"),
-&"move1": SubResource("Animation_b121j")
+&"move1": SubResource("Animation_b121j"),
+&"move2": SubResource("Animation_8iemx")
 }
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8iemx"]
@@ -654,7 +686,6 @@ sources/0 = SubResource("TileSetAtlasSource_8iemx")
 script = ExtResource("1_2r41h")
 
 [node name="pause layer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Pause Menu" parent="pause layer" instance=ExtResource("2_t1rx8")]
 size_flags_vertical = 8
@@ -664,6 +695,7 @@ unique_name_in_owner = true
 script = ExtResource("2_olg7q")
 
 [node name="player1" parent="." instance=ExtResource("3_b121j")]
+unique_name_in_owner = true
 position = Vector2(718, 1375)
 collision_layer = 3
 
@@ -717,6 +749,18 @@ position = Vector2(718, 1345)
 [node name="P2Respawn" type="Node2D" parent="."]
 position = Vector2(771, 1345)
 
+[node name="audio" type="Node" parent="."]
+
+[node name="sfx_death" type="AudioStreamPlayer2D" parent="audio"]
+stream = ExtResource("9_fpun6")
+bus = &"SFX"
+
+[node name="sfx_gameover" type="AudioStreamPlayer2D" parent="audio"]
+stream = ExtResource("9_64w2a")
+bus = &"SFX"
+
+[node name="Music" parent="audio" instance=ExtResource("10_8iemx")]
+
 [node name="BlocksAnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 root_node = NodePath("PushableBlocks")
@@ -725,19 +769,24 @@ libraries = {
 }
 
 [node name="PushableBlocks" parent="BlocksAnimationPlayer" instance=ExtResource("8_b121j")]
-position = Vector2(483, 1157)
+position = Vector2(621, 1358)
 BlockNumber = 1
 GoLeftMode = true
 
-[node name="bears" type="Node" parent="."]
-
-[node name="bear" parent="bears" instance=ExtResource("9_8c41q")]
-position = Vector2(615, 1275)
+[node name="PushableBlocks2" parent="BlocksAnimationPlayer" instance=ExtResource("8_b121j")]
+position = Vector2(622, 1322)
+BlockNumber = 2
+GoLeftMode = true
 
 [node name="tile layers" type="Node" parent="."]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="tile layers"]
 tile_map_data = PackedByteArray("AAAkAFYAAAACAAYAAAAkAFcAAAACAAcAAAAkAFgAAAACAAgAAAAkAFkAAAACAAkAAAAkAFUAAAACAAUAAAAlAFUAAAADAAUAAAAlAFYAAAADAAYAAAAlAFcAAAADAAcAAAAlAFgAAAADAAgAAAAlAFkAAAADAAkAAAAmAFUAAAACAAUAAAAmAFYAAAACAAYAAAAmAFcAAAACAAcAAAAmAFgAAAACAAgAAAAmAFkAAAACAAkAAAAnAFUAAAADAAUAAAAnAFYAAAADAAYAAAAnAFcAAAADAAcAAAAnAFgAAAADAAgAAAAnAFkAAAADAAkAAAAoAFUAAAABAAUAAAAoAFYAAAABAAYAAAAoAFcAAAABAAcAAAAoAFgAAAABAAgAAAAoAFkAAAABAAkAAAApAFUAAAACAAUAAAApAFYAAAACAAYAAAApAFcAAAACAAcAAAApAFgAAAACAAgAAAApAFkAAAACAAkAAAAqAFUAAAADAAUAAAAqAFYAAAADAAYAAAAqAFcAAAADAAcAAAAqAFgAAAADAAgAAAAqAFkAAAADAAkAAAArAFUAAAABAAUAAAArAFYAAAABAAYAAAArAFcAAAABAAcAAAArAFgAAAABAAgAAAArAFkAAAABAAkAAAAsAFUAAAACAAUAAAAsAFYAAAACAAYAAAAsAFcAAAACAAcAAAAsAFgAAAACAAgAAAAsAFkAAAACAAkAAAAtAFUAAAADAAUAAAAtAFYAAAADAAYAAAAtAFcAAAADAAcAAAAtAFgAAAADAAgAAAAtAFkAAAADAAkAAAAuAFUAAAABAAUAAAAuAFYAAAABAAYAAAAuAFcAAAABAAcAAAAuAFgAAAABAAgAAAAuAFkAAAABAAkAAAAvAFUAAAACAAUAAAAvAFYAAAACAAYAAAAvAFcAAAACAAcAAAAvAFgAAAACAAgAAAAvAFkAAAACAAkAAAAwAFUAAAADAAUAAAAwAFYAAAADAAYAAAAwAFcAAAADAAcAAAAwAFgAAAADAAgAAAAwAFkAAAADAAkAAAAxAFUAAAABAAUAAAAxAFYAAAABAAYAAAAxAFcAAAABAAcAAAAxAFgAAAABAAgAAAAxAFkAAAABAAkAAAAyAFUAAAACAAUAAAAyAFYAAAACAAYAAAAyAFcAAAACAAcAAAAyAFgAAAACAAgAAAAyAFkAAAACAAkAAAAzAFUAAAADAAUAAAAzAFYAAAADAAYAAAAzAFcAAAADAAcAAAAzAFgAAAADAAgAAAAzAFkAAAADAAkAAAA0AFUAAAABAAUAAAA0AFYAAAAAAAsAAAA0AFcAAAABAAcAAAA0AFgAAAABAAgAAAA0AFkAAAABAAkAAAA1AFUAAAACAAUAAAA1AFYAAAABAAsAAAA1AFcAAAACAAcAAAA1AFgAAAACAAgAAAA1AFkAAAACAAkAAAA2AFUAAAADAAUAAAA2AFYAAAAAAAsAAAA2AFcAAAABAAcAAAA2AFgAAAABAAgAAAA2AFkAAAABAAkAAAA3AFUAAAAEAAUAAAA3AFYAAAABAAsAAAA3AFcAAAACAAcAAAA3AFgAAAACAAgAAAA3AFkAAAACAAkAAAA0AFIAAAAAAAAAAAA0AFMAAAAAAAEAAAA1AFIAAAABAAAAAAA1AFMAAAABAAEAAAA2AFIAAAACAAAAAAA2AFMAAAACAAEAAAA3AFIAAAADAAAAAAA3AFMAAAADAAEAAAAeAE4AAAAKAAIAAAAeAE8AAAAKAAMAAAAeAFAAAAAKAAQAAAAeAFEAAAAKAAUAAAAeAFIAAAAKAAYAAAAeAFMAAAAKAAcAAAAeAFQAAAAKAAgAAAAeAFUAAAAKAAkAAAAfAE4AAAALAAIAAAAfAE8AAAALAAMAAAAfAFAAAAALAAQAAAAfAFEAAAALAAUAAAAfAFIAAAALAAYAAAAfAFMAAAALAAcAAAAfAFQAAAALAAgAAAAfAFUAAAALAAkAAAAjAFUAAAABAAUAAAAjAFYAAAABAAYAAAAjAFcAAAABAAcAAAAjAFgAAAABAAgAAAAjAFkAAAABAAkAAAAdAFYAAAAAAAsAAAAeAFYAAAABAAsAAAAfAFYAAAAAAAsAAAAgAFYAAAABAAsAAAAhAFYAAAACAAsAAAAiAFYAAAACAAsAAAAgAFcAAAABAAcAAAAhAFcAAAACAAcAAAAiAFcAAAADAAcAAAA8AFYAAAABAAcAAAA9AFYAAAACAAcAAAA+AFYAAAADAAcAAAA4AFcAAAABAAcAAAA5AFcAAAACAAcAAAA6AFcAAAABAAcAAAA7AFcAAAACAAcAAAA8AFcAAAADAAcAAAA6AFgAAAABAAgAAAA7AFgAAAACAAgAAAA8AFgAAAADAAcAAAA4AFgAAAABAAgAAAA5AFgAAAACAAgAAAA4AFYAAAABAAEAAAA4AFkAAAABAAkAAAA5AFYAAAABAAEAAAA5AFkAAAACAAkAAAA6AFYAAAABAAEAAAA6AFkAAAABAAkAAAA7AFYAAAABAAEAAAA7AFkAAAACAAkAAAA=")
 tile_set = SubResource("TileSet_64w2a")
+
+[node name="bears" type="Node" parent="."]
+
+[node name="bear" parent="bears" instance=ExtResource("9_8c41q")]
+position = Vector2(615, 1275)
 
 [connection signal="body_entered" from="cameraPath/CamFollowPath/CAMdangerZone" to="player1" method="_on_CamDangerZone_body_entered"]

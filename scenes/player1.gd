@@ -7,6 +7,8 @@ extends CharacterBody2D
 @onready var Trail:Line2D=$Trail2D
 @onready var Hearts:CPUParticles2D=$CPUParticles2D
 @onready var BlocksAnimations: AnimationPlayer = %BlocksAnimationPlayer
+@onready var music = $"../audio/Music" 
+
 var dashing=false
 const SPEED = 100.0
 const JUMP_VELOCITY = -250.0
@@ -39,6 +41,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jumpP1") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		$sfx_jump.play()
 	if direction:
 		if dashing:
 			velocity.x = direction * DASH_SPEED
@@ -56,12 +59,17 @@ func _physics_process(delta: float) -> void:
 		can_dash=false
 		can_dash_timer.start()
 		dash_timer.start()
+		if velocity.x != 0:
+			$sfx_dash.play()
 	move_and_slide()
 	
 		
 func killPlayer():
+	music.stop()
+	$"../audio/sfx_death".play()
+	$"../audio/sfx_gameover".play()
 	cam.deathPause=true
-	BlocksAnimations.play("RESET")
+	
 	
 func _on_CamDangerZone_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
@@ -73,11 +81,12 @@ func _on_animated_sprite_2d_animation_looped() -> void:
 	if animatedSprite.animation=="death":
 			cam.progress=0.0
 			cam.deathPause=false
+			music.play()
 			position=$"../P1Respawn".position
 			p2.position=$"../P2Respawn".position
 			print("reset")
 			animatedSprite.play("default")
-
+			BlocksAnimations.play("RESET")
 
 
 func _on_dash_timer_timeout() -> void:

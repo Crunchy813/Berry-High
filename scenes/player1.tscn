@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://phicum10035h"]
+[gd_scene load_steps=52 format=3 uid="uid://phicum10035h"]
 
 [ext_resource type="Script" uid="uid://dr87yatjsw4hx" path="res://scenes/player1.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bfvdjbi676amm" path="res://assets/Charecters/StrawBerry/StrawberryDashLeft.png" id="2_euhpk"]
@@ -16,15 +16,17 @@
 [ext_resource type="Texture2D" uid="uid://d1mfmhvhc466v" path="res://assets/Charecters/StrawBerry/strawBerryJump.png" id="8_x5ced"]
 [ext_resource type="Texture2D" uid="uid://8jkj2p4i7ha6" path="res://assets/Charecters/StrawBerry/PlayerWin.png" id="14_do31k"]
 [ext_resource type="Texture2D" uid="uid://b6i8fcudqxug4" path="res://assets/Charecters/StrawBerry/OneHeart.png" id="16_tsh6u"]
+[ext_resource type="AudioStream" uid="uid://dy8k0j3p2jj8x" path="res://assets/Sound/soundeffectsgame/sounds__dashsound.wav" id="17_6amox"]
+[ext_resource type="AudioStream" uid="uid://h0sg82a1lb4d" path="res://assets/Sound/soundeffectsgame/sounds__jumpsound2.wav" id="17_do31k"]
 
 [sub_resource type="Curve" id="Curve_do31k"]
-_limits = [0.04494381, 1.0, 0.0, 2.0]
-_data = [Vector2(0, 0.40979677), 0.0, 0.0, 0, 0, Vector2(2, 1), 0.0, 0.0, 0, 0]
+_limits = [0.0449438, 1.0, 0.0, 2.0]
+_data = [Vector2(0, 0.409797), 0.0, 0.0, 0, 0, Vector2(2, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_tsh6u"]
-offsets = PackedFloat32Array(0, 0.7567568, 1)
-colors = PackedColorArray(0.7019608, 0.4862745, 0.21176471, 1, 0.72813994, 0.5313991, 0.2810016, 0.94798625, 1, 1, 1, 0.40784314)
+offsets = PackedFloat32Array(0, 0.756757, 1)
+colors = PackedColorArray(0.701961, 0.486275, 0.211765, 1, 0.72814, 0.531399, 0.281002, 0.947986, 1, 1, 1, 0.407843)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tvatu"]
 atlas = ExtResource("2_euhpk")
@@ -286,12 +288,12 @@ radius = 5.0
 height = 14.0
 
 [sub_resource type="Curve" id="Curve_tvatu"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.79775286), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.797753), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_tvatu"]
-offsets = PackedFloat32Array(0, 0.6148649, 1)
-colors = PackedColorArray(1, 0.75, 0.75, 0.34509805, 1, 0.9881757, 0.9881757, 0.024854243, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.614865, 1)
+colors = PackedColorArray(1, 0.75, 0.75, 0.345098, 1, 0.988176, 0.988176, 0.0248542, 1, 1, 1, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tvatu"]
 size = Vector2(11.5, 16)
@@ -314,7 +316,7 @@ gravity = Vector2(0, -30)
 initial_velocity_min = 21.56
 initial_velocity_max = 40.57
 scale_amount_curve = SubResource("Curve_do31k")
-color = Color(0.7, 0.48766667, 0.21000001, 1)
+color = Color(0.7, 0.487667, 0.21, 1)
 color_ramp = SubResource("Gradient_tsh6u")
 anim_speed_max = 7.0
 
@@ -344,10 +346,17 @@ wait_time = 0.3
 [node name="can_dash_timer1" type="Timer" parent="."]
 wait_time = 0.4
 
+[node name="sfx_dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_6amox")
+bus = &"SFX"
+
+[node name="sfx_jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_do31k")
+
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-modulate = Color(0.17703262, 0.7612657, 0.67755085, 1)
+modulate = Color(0.177033, 0.761266, 0.677551, 1)
 position = Vector2(3.25, -8)
 shape = SubResource("RectangleShape2D_tvatu")
 

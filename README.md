@@ -1,7 +1,9 @@
-Berry High is a 2 two player 2D platformer demo made using Godot engine. The goal is to reach the top and reunite the berry players.
+Berry High is a 2 two player 2D platformer demo made using Godot engine. The goal is to reach the top and reunite the berry players. Push logs by dashing into them.
 
 Controls:
-  Player 1 (arrow keys): 
+
+
+	Player 1 (arrow keys): 
 	  Right arrow key: Move right
 	  Left arrow key: Move left
 	  Up arrow key: Jump
@@ -10,6 +12,6 @@ Controls:
 	Player 2 (WAD): 
 	  A: Move right
 	  D: Move left
-	  W Jump
+	  W: Jump
 	  Left CTRL: Dash
 	  
